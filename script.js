@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to add a task
     function addTask() {
-        const taskText = taskInput.value.trim(); // get and trim input
+        const taskText = taskInput.value.trim();
         if (taskText === "") {
             alert("Please enter a task.");
             return;
@@ -21,12 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
         removeBtn.textContent = "Remove";
         removeBtn.className = 'remove-btn';
 
-        // Assign onclick event to remove task
-        removeBtn.onclick = function () {
+        // Use addEventListener instead of onclick
+        removeBtn.addEventListener('click', () => {
             taskList.removeChild(li);
-        };
+        });
 
-        // Append button to li and li to list
+        // Append remove button to li and li to list
         li.appendChild(removeBtn);
         taskList.appendChild(li);
 
@@ -35,4 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Event listeners
-    addButton.addEventLis
+    addButton.addEventListener('click', addTask);
+
+    taskInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            addTask();
+        }
+    });
+});
+
